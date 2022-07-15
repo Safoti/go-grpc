@@ -1,0 +1,30 @@
+syntax = "proto3";
+// 包名
+package pstream;
+option go_package ="002work-grpc/pn;pn";//包路径
+// 服务端请求的数据结构
+message SServerRequest{
+    int32  id =1;
+}
+// 服务端响应的数据结构
+message SClientResponse{
+    int32 id=1;
+    string name=2;
+}
+
+
+// 定义的服务名
+service ISrStreamService{
+
+
+    // 单项RPC ：单个请求，单个响应
+    rpc ISReqSingelrep(SServerRequest)returns (SClientResponse);
+
+    // 服务端流式 ：单个请求，集合响应
+    rpc ISReqMultrep(SServerRequest) returns(stream SClientResponse );
+    // 客户端流式 ：集合请求，单个响应
+
+    rpc MUISReqMultrep(stream SServerRequest) returns( SClientResponse );
+    // 双向流式 ：集合请求，集合响应
+    rpc SMUISReqMultrep(stream SServerRequest) returns( stream SClientResponse );
+}

@@ -1,0 +1,21 @@
+//使用的语法协议
+syntax = "proto3";
+//存放路径
+package bp;
+//声明go package                        前面是包名;后面是别名
+option go_package ="go-grpc-demo/01hello-grpc/pb;pb";//包路径
+
+
+//定义请求的消息
+message HelloRequest{
+    string name=1;
+}
+//定义响应的消息体
+message HelloResponse{
+    string  message=1;
+}
+//定义服务名
+service Greeter {
+           //方法
+    rpc   SayHello(HelloRequest) returns (HelloResponse){}
+}
